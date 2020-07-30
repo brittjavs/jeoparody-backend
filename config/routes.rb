@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :users
+  resources :scores
 end
+
+# Do we want to namespace the routes?
+# Do we want it to be nested?
