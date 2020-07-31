@@ -1,3 +1,5 @@
+require 'JsonWebToken'
+# require 'JWT'
 class Api::V1::UsersController < ApplicationController
 
     before_action :set_user, only: [:show, :destroy]
@@ -18,9 +20,9 @@ class Api::V1::UsersController < ApplicationController
             # Do we want to use sessions?
             # session[:user_id] = @user.id
             # --we might not need sessions if we use jwt...still learning
-            render json: {token: Auth.createToken(@user)}
+            render json: {token: JsonWebToken.create_token({username: user.username, id:})}
         else
-            render json: {errors: user.errors.full_messages} status: 500
+            render json: {errors: @user.errors.full_messages} status: 500
         end
     end
 
