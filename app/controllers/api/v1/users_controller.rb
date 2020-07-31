@@ -17,7 +17,8 @@ class Api::V1::UsersController < ApplicationController
         if @user.save
             # Do we want to use sessions?
             # session[:user_id] = @user.id
-            render json: @user, status: 200
+            # --we might not need sessions if we use jwt...still learning
+            render json: {token: Auth.createToken(@user)}
         else
             render json: {errors: user.errors.full_messages} status: 500
         end
