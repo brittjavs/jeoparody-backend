@@ -18,6 +18,9 @@ class Api::V1::UsersController < ApplicationController
             # Do we want to use sessions?
             # session[:user_id] = @user.id
             render json: @user, status: 200
+        else
+            render json: {errors: user.errors.full_messages} status: 500
+        end
     end
 
     def destroy
@@ -32,7 +35,7 @@ class Api::V1::UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:username, :password)
-        # Is it password or password_digest here?
+        # Is it password or password_digest here? It should be password 
     end
 
 end
