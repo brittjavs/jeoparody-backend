@@ -1,4 +1,4 @@
-class ScoresController < ApplicationController
+class Api::V1::ScoresController < ApplicationController
 
     before_action :set_score, only: [:show, :destroy]
 
@@ -29,10 +29,10 @@ class ScoresController < ApplicationController
         end
     end
 
-    def destroy
-        # Do we want to the user to be able to delete the score?
-        @score.destroy
-    end
+    # def destroy
+    #     # Do we want to the user to be able to delete the score?
+    #     @score.destroy
+    # end
 
     private
 
