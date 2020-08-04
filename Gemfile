@@ -20,7 +20,7 @@ gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use JWT for authentication with tokens
-gem 'jwt', '~> 1.5.6'
+# gem 'jwt', '~> 1.5.6'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
