@@ -1,17 +1,33 @@
-# require 'JsonWebToken'
-# require 'JWT'
 class Api::V1::SessionsController < ApplicationController
-    # from video
-    # def login
-    #     user = User.find_by(username: params[:username])
-    #     if user && user.authenticate(params[:password])
-    #         render json: { token: JsonWebToken.create_token(username: user.username, id: user.id)}, status: 200
-    #     else
-    #         render json: {errors: {message: "Unable to find a user with that username and password"}}, status: 500
-    #     end
-    # end
 
+    def login
+        user = User.find_by(username: sessions[:params][:username] )
+        if user && user.authenticate(params[:session][:password])
+            session[:user_id] = user.id
+            render json: user    
+        else
+            render json: {
+                error: "Invalid username or passsword"
+            }
+        end
+    end
 
+    def get_current_user
+        if logged_in?
+            render json: current_user
+        else
+            render json: {
+                error: "You must log in."
+            }
+        end
+    end
+
+    def destroy
+        ssession.clear
+        render json: {
+            notice: "You have successfully logged out."
+        }, status: 200
+    end
 
 
 end
