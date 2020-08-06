@@ -4,12 +4,13 @@ require 'json_web_token'
 class Api::V1::ScoresController < ApplicationController
 
     def index
-        token = request.env["HTTP_AUTHORIZATION"]
-        # binding.pry
-        if token && JsonWebToken.decode_token(token)
-        render json: Score.all, status: 200
-        else 
-            render json: {message: "you must have a token"}, status: 500
+        if logged_in?
+            scores = Score.all
+            render json: scores
+        else
+            render json: {
+                error: "You must be logged in to view scores."
+            }
         end
     end
 
