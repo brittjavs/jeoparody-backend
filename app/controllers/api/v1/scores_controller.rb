@@ -14,18 +14,6 @@ class Api::V1::ScoresController < ApplicationController
         end
     end
 
-    # !!I'm not sure if we should handle show on frontend so we don't have duplicate data in out redux store.
-
-
-    # def show
-    #     if logged_in
-    #         scores = current_user.scores 
-    #     render json: scores
-    #     else
-    #         render json: {message: "You must be logged in to view your scores"}
-    # end
-    
-
     def create
         @score = current_user.scores.build(score_params)
         if @score.save
@@ -40,13 +28,8 @@ class Api::V1::ScoresController < ApplicationController
 
     private
 
-    # def set_score
-    #     @score = Score.find_by(id:params[:id])
-    # end
-
     def score_params
         params.require(:user).permit(:game_total)
-        # Is it password or password_digest here?
     end
 
 
