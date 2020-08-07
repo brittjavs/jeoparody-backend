@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
-    before_action :set_user, only: [:show, :destroy]
+    # before_action :set_user, only: [:show, :destroy]
 
     def index
       users = User.all 
@@ -13,12 +13,14 @@ class Api::V1::UsersController < ApplicationController
     end
     
     def create
+      
       user = User.new(user_params)
       if user.save
         session[:user_id] = user.id
+        # byebug
         render json: user, status: 200
       else
-        render json {
+        render json: {
           error: user.errors.full_messages.to_sentence
         }
       end
@@ -31,9 +33,9 @@ class Api::V1::UsersController < ApplicationController
     
     private
 
-    def set_user
-        @user = User.find_by(id:params[:id])
-    end
+    # def set_user
+    #     @user = User.find_by(id:params[:id])
+    # end
 
     def user_params
         params.require(:user).permit(:username, :password)

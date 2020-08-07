@@ -4,7 +4,7 @@ require 'json_web_token'
 class Api::V1::ScoresController < ApplicationController
 
     def index
-        if logged_in?
+        if logged_in
             scores = Score.all
             render json: scores
         else

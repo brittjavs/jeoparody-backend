@@ -1,7 +1,8 @@
 class Api::V1::SessionsController < ApplicationController
 
     def login
-        user = User.find_by(username: sessions[:params][:username] )
+        # byebug
+        user = User.find_by(username: params[:session][:username] )
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id
             render json: user    
@@ -13,7 +14,7 @@ class Api::V1::SessionsController < ApplicationController
     end
 
     def get_current_user
-        if logged_in?
+        if logged_in
             render json: current_user
         else
             render json: {
