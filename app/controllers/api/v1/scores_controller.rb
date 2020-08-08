@@ -1,6 +1,3 @@
-
-require 'json_web_token'
-
 class Api::V1::ScoresController < ApplicationController
 
     def index
@@ -15,12 +12,12 @@ class Api::V1::ScoresController < ApplicationController
     end
 
     def create
-        @score = current_user.scores.build(score_params)
-        if @score.save
-            render json: @score, status: 200
+        score = current_user.scores.build(score_params)
+        if score.save
+            render json: score, status: 200
         else
             render json: {
-                error: @score.errors.full_messages.to_sentence
+                error: score.errors.full_messages.to_sentence
             }
         end
     end

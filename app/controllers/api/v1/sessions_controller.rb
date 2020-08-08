@@ -1,8 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
 
-    def login
-        # byebug
-        user = User.find_by(username: params[:session][:username] )
+    def create
+        user = User.find_by(username: params[:session][:username])
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id
             render json: user    
@@ -18,7 +17,7 @@ class Api::V1::SessionsController < ApplicationController
             render json: current_user
         else
             render json: {
-                error: "You must log in."
+                error: "No one is logged in"
             }
         end
     end
