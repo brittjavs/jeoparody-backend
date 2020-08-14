@@ -22,12 +22,10 @@ class Api::V1::SessionsController < ApplicationController
         end
     end
 
-    def destroy
+    def logout
         session.clear
         render json: {
             notice: "You have successfully logged out."
         }, status: 200
     end
-
-
 end
